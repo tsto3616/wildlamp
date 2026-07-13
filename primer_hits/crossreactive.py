@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-
-import csv
 from Bio.Blast import NCBIWWW, NCBIXML
 
 # ------------------------------------------------------------

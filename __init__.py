@@ -52,7 +52,7 @@ from .primers.lamp_score import (primer_basic_score,
 )
 from .primers.optimise_primer import optimise_primer
 from .primers.build_full_lset import build_full_lset
-from .primers.primer_from_csv import load_primers_csv
+from .primers.primer_from_csv import load_primers_from_csv
 from .primers.analyse_primer_rows import analyse_row
 
 # -----------------------------
@@ -94,6 +94,19 @@ from .species.ncbi_lookup import accession_to_gene_id, get_species_from_accessio
 from .species.table import write_species_lookup
 
 # -----------------------------
+# simulations
+# -----------------------------
+from .simulations.curve_fit import fit_standard_curve, copies_from_Tt
+from .simulations.dye import color_pr_from_copies, delta_rgb, PR_BASELINE
+from .simulations.model_rtlamp import (
+    best_match_mismatches, compute_hairpin, compute_homodimer, compute_heterodimer, 
+    has_3prime_dimer, compute_primer_features, fraction_sequestered, fraction_free,
+    binding_efficiency, dimer_sink_factor, lamp_tm_score, lamp_primer_biophysical_score, 
+    rt_lamp_rate, simulate_rt_qlamp
+)
+from .simulations.sim_curve import simulate_quant_curve_pr, QUANT_CONC
+
+# -----------------------------
 # Main pipeline entry point
 # -----------------------------
 from .pipeline.init_primers import init_primers
@@ -103,6 +116,8 @@ from .pipeline.csv2hits import csv2hits
 from .pipeline.final_primers import final_primers
 from .pipeline.final_perturb import final_perturbation
 from .pipeline.validate import final_valid
+from .pipeline.conc import estimate_copies
+from .pipeline.stand_curve import stand_curves
 
 # -----------------------------
 # Utilities
@@ -111,6 +126,7 @@ from .utils.seq import gc, bad_run, rc
 from .utils.gc_content import gc_content
 from .utils.load_seq import load_primers_csv, load_fasta
 from .utils.valid_csv_write import write_outputs
+from .utils.build_primers import build_BIP, build_FIP
 
 # -----------------------------
 # Public API
@@ -154,8 +170,18 @@ __all__ = [
     "accession_to_gene_id", "get_species_from_accession",
     "write_species_lookup",
     
+    # simulations
+    "fit_standard_curve", "copies_from_Tt",
+    "color_pr_from_copies", "delta_rgb", "PR_BASELINE", 
+    "best_match_mismatches", "compute_hairpin", "compute_homodimer", "compute_heterodimer", 
+    "has_3prime_dimer", "compute_primer_features", "fraction_sequestered", "fraction_free", 
+    "binding_efficiency", "dimer_sink_factor", "lamp_tm_score", "lamp_primer_biophysical_score", 
+    "rt_lamp_rate", "simulate_rt_qlamp", 
+    "simulate_quant_curve_pr", "QUANT_CONC", 
+    
     # utilities
     "gc", "bad_run", "rc", "gc_content", "load_primers_csv", "load_fasta", "write_outputs",
+    "build_BIP", "build_FIP",
     
     # Pipeline
     "init_primers",
@@ -165,4 +191,6 @@ __all__ = [
     "final_primers",
     "final_perturbation",
     "final_valid",
+    "estimate_copies", 
+    "stand_curves"
 ]
