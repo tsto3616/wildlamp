@@ -12,9 +12,9 @@ Users call:
 
 """
 
-from primers.scan import primer_ok
-from primers.species import primer_species_coverage
-from thermodynamics.scoring import thermo_score
+from ..primers.scan import primer_ok
+from ..primers.species import primer_species_coverage
+from ..thermodynamics.scoring import thermo_score
 
 
 def optimise_primer(

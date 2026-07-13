@@ -5,7 +5,7 @@ These functions identify candidate primer windows in a reference sequence
 and apply basic filtering rules (length, GC content, homopolymers, ACGT-only).
 """
 
-from utils.seq import gc, bad_run
+from ..utils.seq import gc, bad_run
 
 
 def primer_ok(p: str) -> bool:

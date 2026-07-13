@@ -10,7 +10,7 @@ Provides:
 - rtlamp_score()
 """
 
-from utils.seq import gc, bad_run
+from ..utils.seq import gc, bad_run
 
 
 def primer_basic_score(p: str) -> int:

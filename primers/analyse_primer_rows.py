@@ -1,7 +1,7 @@
-from utils.gc_content import gc_content
-from perturbation.mismatch_counter import best_match
-from thermodynamics.primer_access import binding_accessibility
-from thermodynamics.simple_thermo import thermo
+from ..utils.gc_content import gc_content
+from ..perturbation.mismatch_counter import best_match
+from ..thermodynamics.primer_access import binding_accessibility
+from ..thermodynamics.simple_thermo import thermo
 
 def analyse_row(row, template_seq, template_structure, template_mfe):
     primer_name = row["Primer"]

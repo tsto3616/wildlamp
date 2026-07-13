@@ -9,7 +9,7 @@ pip install wildlamp
 The main command for the construction of LAMP primers is the command:
 
 ```
-init_primers(alignment_path, output="fill in for your specified output.csv")
+wl.init_primers(alignment_path, output="fill in for your specified output.csv")
 ```
 
 Where the user specifies the file path for the aligned set of sequences and the rest occurs by computer. 
@@ -17,13 +17,13 @@ Where the user specifies the file path for the aligned set of sequences and the 
 Following on from that the user can retrieve the species from the aligned sequence accessions provided they are from NCBI, using the command: 
 
 ```
-species_fetch(csv_file)
+wl.species_fetch(csv_file)
 ```
 
 The primers can then be checked for hits against the genome of a species of their choice using either the csv2hits or the primer2hits command. 
 
 ```
-csv2hits(csv_file, taxid, output="fill in your preferred output prefix.csv")
+wl.csv2hits(csv_file, taxid, output="fill in your preferred output prefix.csv")
 
 # or use this command if you want to specify your own primers independent of the csv
 panel: [
@@ -32,19 +32,19 @@ panel: [
     ...
 ]
 
-primers2hits(panel, taxid, output="preferred specified csv output")
+wl.primers2hits(panel, taxid, output="preferred specified csv output")
 ```
 
 The final primers can be generated through the command: 
 
 ```
-final_primers(alignment_path, primer_csv_path, output="preferred csv output")
+wl.final_primers(alignment_path, primer_csv_path, output="preferred csv output")
 ```
 
 The final perturbation checks can be performed with the command below - with both lightweight and heavy perturbation analysis. Heavyweight analysis is primer-thermodynamic stress test and the lightweight is a biological/ transcript specificity/ sensitivity analysis... or more simply a multitransript mismatch scan. The first transcript in the fasta file is assumed to be the reference for the heavyweight analysis. Note only use unaligned fasta files for this section. The command can be called by: 
 
 ```
-final_perturbation(unaligned_fasta_path, 
+wl.final_perturbation(unaligned_fasta_path, 
     primer_csv_path_from_earlier, 
     output="perturbation_output.csv path")
 ```
@@ -52,17 +52,17 @@ final_perturbation(unaligned_fasta_path,
 Final validation check for the primer sets:
 
 ```
-final_valid(primer_csv_path, unaligned_fasta_path, output="output csv file")
+wl.final_valid(primer_csv_path, unaligned_fasta_path, output="output csv file")
 ```
 
 Once the primers are settled, run the csv file through this code to generate the standard curve. But the csv must be edited first to have a column "Gene" and "fasta":
 ``` 
-stand_curves(primer_gene_csv_path, output="standard_curve.csv, but fill in yourself")
+wl.stand_curves(primer_gene_csv_path, output="standard_curve.csv, but fill in yourself")
 ```
 
 If one wants to run the standard curve quantification in the absence of experimental data the following code will do that, but first caveates, must fill in the user R, G, B values, the gene name in the csv, the curve_csv from the step above, the output and the dilution factor. The dilution factor is 1:X where X is the user specified value: 
 ```
-estimate_copies(user_R, user_G, user_B,
+wl.estimate_copies(user_R, user_G, user_B,
                     gene_name, curve_csv,
                     output="final_csv.csv",
                     dilution_factor=1)

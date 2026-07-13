@@ -2,28 +2,28 @@
 
 import csv
 
-from alignment.load_seq import load_alignment, clean_alignment
-from alignment.conservation import compute_conservation
+from ..alignment.load_seq import load_alignment, clean_alignment
+from ..alignment.conservation import compute_conservation
 
-from primers.scan import scan_primers
-from primers.species import filter_primers_by_species, primer_species_coverage
-from primers.clash import build_clash_map
-from primers.detect_lamp import detect_lamp_sets
+from ..primers.scan import scan_primers
+from ..primers.species import filter_primers_by_species, primer_species_coverage
+from ..primers.clash import build_clash_map
+from ..primers.detect_lamp import detect_lamp_sets
 
-from primers.amplicons import amplicon_heuristic, amplicon_score
-from thermodynamics.primer3_eval import evaluate_primer3
-from thermodynamics.vienna_eval import validate_lamp_set_vienna
+from ..primers.amplicons import amplicon_heuristic, amplicon_score
+from ..thermodynamics.primer3_eval import evaluate_primer3
+from ..thermodynamics.vienna_eval import validate_lamp_set_vienna
 
-from primers.lamp_score import lamp_score, rtlamp_score
+from ..primers.lamp_score import lamp_score, rtlamp_score
 
-from perturbation.analysis import perturbation_analysis
-from perturbation.robustness import (
+from ..perturbation.analysis import perturbation_analysis
+from ..perturbation.robustness import (
     build_robustness_matrix,
     compute_perturbation_robustness_scores
 )
 
-from failures.debug import debug_no_matches
-from failures.failure_mode import analyze_failure_modes
+from ..failures.debug import debug_no_matches
+from ..failures.failure_mode import analyze_failure_modes
 
 
 def init_primers(alignment_path, output):

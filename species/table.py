@@ -6,7 +6,7 @@ Provides:
 """
 
 import csv
-from species.ncbi_lookup import get_species_from_accession
+from ..species.ncbi_lookup import get_species_from_accession
 
 
 def write_species_lookup(accessions, outfile="species_lookup.csv"):

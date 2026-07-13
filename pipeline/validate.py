@@ -1,7 +1,7 @@
-from utils.load_seq import load_primers_csv, load_fasta
-from thermodynamics.fold_rna import fold_rna
-from primers.analyse_primer_rows import analyse_row
-from utils.valid_csv_write import write_outputs
+from ..utils.load_seq import load_primers_csv, load_fasta
+from ..thermodynamics.fold_rna import fold_rna
+from ..primers.analyse_primer_rows import analyse_row
+from ..utils.valid_csv_write import write_outputs
 
 def final_valid(primer_csv, fasta_path, output="fill with csv"):
     """

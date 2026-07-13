@@ -1,6 +1,6 @@
 [project]
 name = "wildlamp"
-version = "1.0.1"
+version = "1.0.2"
 description = "A computational pipeline for designing conserved RT-LAMP primers across genomically uncharacterised wildlife species."
 authors = [
     { name = "Thomas Stocker", email = "thomas.stocker@sydney.edu.au" }

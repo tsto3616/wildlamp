@@ -6,7 +6,7 @@ Provides:
 - filter_primers_by_species(): retain primers amplifying ≥ min_species
 """
 
-from primers.mismatch import mismatch_cost
+from ..primers.mismatch import mismatch_cost
 
 
 def primer_species_coverage(
