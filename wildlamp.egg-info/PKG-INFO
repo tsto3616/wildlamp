@@ -1,6 +1,6 @@
-Metadata-Version: 2.4
+Metadata-Version: 2.2
 Name: wildlamp
-Version: 1.0.2
+Version: 1.0.3
 Summary: A computational pipeline for designing conserved RT-LAMP primers across genomically uncharacterised wildlife species.
 Author-email: Thomas Stocker <thomas.stocker@sydney.edu.au>
 Requires-Python: >=3.9
@@ -18,7 +18,6 @@ Requires-Dist: pytest; extra == "dev"
 Requires-Dist: black; extra == "dev"
 Requires-Dist: ruff; extra == "dev"
 Requires-Dist: mypy; extra == "dev"
-Dynamic: license-file
 
 # wildlamp: a tool for identification of primer binding sites among conserved gene families of primers. 
 
