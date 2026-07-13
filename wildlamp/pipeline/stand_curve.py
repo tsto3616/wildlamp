@@ -4,8 +4,8 @@ import numpy as np
 
 from wildlamp.utils.load_seq import load_fasta
 from wildlamp.utils.build_primers import build_BIP, build_FIP
-from simulations.sim_curve import simulate_quant_curve_pr
-from simulations.curve_fit import fit_standard_curve
+from wildlamp.simulations.sim_curve import simulate_quant_curve_pr
+from wildlamp.simulations.curve_fit import fit_standard_curve
 from wildlamp.utils.gene_primer import load_gene_primer_csv
 
 def stand_curves(primer_gene_csv, output="standard_curve.csv"):

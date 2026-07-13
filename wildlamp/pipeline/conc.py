@@ -1,6 +1,6 @@
 import csv
-from simulations.dye import delta_rgb, PR_BASELINE
-from simulations.curve_fit import copies_from_Tt
+from wildlamp.simulations.dye import delta_rgb, PR_BASELINE
+from wildlamp.simulations.curve_fit import copies_from_Tt
 
 
 def estimate_copies(user_R, user_G, user_B,

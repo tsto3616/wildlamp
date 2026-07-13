@@ -1,6 +1,6 @@
 import numpy as np
-from simulations.model_rtlamp import simulate_rt_qlamp
-from simulations.dye import color_pr_from_copies, delta_rgb, PR_BASELINE
+from wildlamp.simulations.model_rtlamp import simulate_rt_qlamp
+from wildlamp.simulations.dye import color_pr_from_copies, delta_rgb, PR_BASELINE
 
 QUANT_CONC = [1e6, 3e5, 1e5, 3e4, 1e4, 3e3, 1e3, 3e2, 1e2]
 
