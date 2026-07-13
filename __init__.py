@@ -50,6 +50,9 @@ from .primers.lamp_score import (primer_basic_score,
                                  lamp_score,
                                  rtlamp_score
 )
+from .primers.optimise_primer import optimise_primer
+from .primers.build_full_lset import build_full_lset
+from .primers.primer_from_csv import load_primers_from_csv
 
 # -----------------------------
 # Primer_hits
@@ -74,6 +77,7 @@ from .failures.failure_mode import analyze_failure_modes
 # -----------------------------
 from .thermodynamics.primer3_eval import evaluate_primer3
 from .thermodynamics.vienna_eval import vienna_fold_dna, validate_primer_vienna, validate_lamp_set_vienna
+from .thermodynamics.scoring import thermo_score
 
 # -----------------------------
 # Species
@@ -89,6 +93,7 @@ from .pipeline.init_primers import init_primers
 from .pipeline.species_fetch import species_fetch
 from .pipeline.primer2hits import primers2hits
 from .pipeline.csv2hits import csv2hits
+from .pipeline.final_primers import final_primers
 
 # -----------------------------
 # Utilities
@@ -111,6 +116,8 @@ __all__ = [
     "amplicon_heuristic", "amplicon_score",
     "primer_basic_score", "primer_thermo_score", "primer_struct_score", "primer_conservation_score",
     "lamp_score", "rtlamp_score", 
+    "optimise_primer", "build_full_lset",
+    "load_primers_from_csv",
 
     # primer_hits
     "blast_sequence", "biologically_meaningful",
@@ -125,6 +132,7 @@ __all__ = [
     
     # thermodynamics
     "evaluate_primer3", "vienna_fold_dna",
+    "thermo_score",
     
     # species
     "extract_accession", "extract_accessions_from_csv",
@@ -139,4 +147,5 @@ __all__ = [
     "species_fetch",
     "primers2hits",
     "csv2hits",
+    "final_primers",
 ]

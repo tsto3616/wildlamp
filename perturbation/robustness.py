@@ -8,9 +8,9 @@ Includes:
 
 import numpy as np
 import primer3
-from wildlamp.primers.mismatch import mismatch_cost
-from wildlamp.thermodynamics.vienna_eval import vienna_fold_dna
-from wildlamp.perturbation.mutate import perturb_primer
+from primers.mismatch import mismatch_cost
+from thermodynamics.vienna_eval import vienna_fold_dna
+from perturbation.mutate import perturb_primer
 
 
 def build_robustness_matrix(lamp_sets, aln, names):

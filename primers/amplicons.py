@@ -7,7 +7,7 @@ Provides:
 - amplicon_score(): convert amplicon_heuristic() output into a numeric score.
 """
 
-from wildlamp.utils.seq import gc, bad_run
+from utils.seq import gc, bad_run
 
 
 def amplicon_heuristic(seq: str):

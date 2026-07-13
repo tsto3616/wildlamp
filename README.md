@@ -35,6 +35,13 @@ panel: [
 primers2hits(panel, taxid, output="preferred specified csv output")
 ```
 
+The final primers can be generated through the command: 
+
+```
+final_primers(alignment_path, primer_csv_path, output="preferred csv output")
+```
+
+
 File directory is below:
 
 ```
@@ -59,6 +66,7 @@ wildlamp/
 |
 |-- pipeline/
 |    |-- csv2hits.py    # csv2hits
+|    |-- final_primers.py   # final_primers
 |    |-- init_primers.py    # init_primers
 |    |-- primer2hits.py     # primers2hits
 |    |-- species_fetch.py   # species_fetch
@@ -68,11 +76,14 @@ wildlamp/
 |
 |-- primers/
 |    |-- amplicons.py   # amplicon_heuristic and amplicon_score
+|    |-- build_full_lset.py # build_full_lset
 |    |-- clash.py   # primer_clash, build_clash_map
 |    |-- detect_lamp.py # detect_lamp_sets
 |    |-- lamp_score.py  # primer_basic_score, primer_thermo_score, primer_struct_score
 |    |                  # primer_conservation_score, lamp_score, rtlamp_score
 |    |-- mismatch.py    # mismatch_cost
+|    |-- optimise_primer.py # optimise_primer
+|    |-- primer_from_csv.py # load_primers_from_csv
 |    |-- scan.py    # primer_ok, scan_primers
 |    |-- species.py # primer_species_coverage, filter_primers_by_species
 |
@@ -118,6 +129,7 @@ wildlamp/
 |
 |-- thermodynamics/
 |    |-- primer3_eval.py    # evaluate_primer3
+|    |-- scoring.py # thermo_score
 |    |-- vienna_eval.py     # vienna_fold_dna, validate_primer_vienna, validate_lamp_set_vienna
 |
 |-- utils/

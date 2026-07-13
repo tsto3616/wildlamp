@@ -72,7 +72,7 @@ def validate_primer_vienna(dna_seq: str, cutoff: float = -5.0) -> dict:
 def validate_lamp_set_vienna(s: dict, cutoff: float = -5.0) -> dict:
     """
     Validate all primers in a LAMP set using ViennaRNA.
-
+ 
     Parameters
     ----------
     s : dict
@@ -101,3 +101,4 @@ def validate_lamp_set_vienna(s: dict, cutoff: float = -5.0) -> dict:
     s["vienna_validation"] = results
     s["vienna_pass"] = all_pass
     return s
+

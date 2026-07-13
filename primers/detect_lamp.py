@@ -6,8 +6,8 @@ within a reference sequence using spacing rules, clash maps, and
 species-coverage scoring.
 """
 
-from wildlamp.utils.seq import rc
-from wildlamp.primers.species import primer_species_coverage
+from utils.seq import rc
+from primers.species import primer_species_coverage
 
 
 def detect_lamp_sets(ref, primers, aln, names, clash):
