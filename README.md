@@ -41,6 +41,19 @@ The final primers can be generated through the command:
 final_primers(alignment_path, primer_csv_path, output="preferred csv output")
 ```
 
+The final perturbation checks can be performed with the command below - with both lightweight and heavy perturbation analysis. Heavyweight analysis is primer-thermodynamic stress test and the lightweight is a biological/ transcript specificity/ sensitivity analysis... or more simply a multitransript mismatch scan. The first transcript in the fasta file is assumed to be the reference for the heavyweight analysis. Note only use unaligned fasta files for this section. The command can be called by: 
+
+```
+final_perturbation(unaligned_fasta_path, 
+    primer_csv_path_from_earlier, 
+    output="perturbation_output.csv path")
+```
+
+Final validation check for the primer sets:
+
+```
+final_valid(primer_csv_path, unaligned_fasta_path, output="output csv file")
+'''
 
 File directory is below:
 
@@ -61,21 +74,26 @@ wildlamp/
 |
 |-- perturbation/
 |    |-- analysis.py # perturbation_analysis
+|    |-- best_mismatch_score.py # best_mismatch_score, find_best_matches
+|    |-- mismatch_counter.py    # best_match
 |    |-- mutate.py  # mutate_base and perturb_primer
 |    |-- robustness.py  # built_robustness_matrix, compute_perturbation_robustness_scores
 |
 |-- pipeline/
 |    |-- csv2hits.py    # csv2hits
+|    |-- final_perturb.py   # fianl_perturbation
 |    |-- final_primers.py   # final_primers
 |    |-- init_primers.py    # init_primers
 |    |-- primer2hits.py     # primers2hits
 |    |-- species_fetch.py   # species_fetch
+|    |-- validate.py    # final_validate
 |
 |-- primer_hits/
 |    |-- crossreactive.py   # blast_sequence, biologically_meaningful
 |
 |-- primers/
 |    |-- amplicons.py   # amplicon_heuristic and amplicon_score
+|    |-- analyse_primer_rows.py # analyse_row
 |    |-- build_full_lset.py # build_full_lset
 |    |-- clash.py   # primer_clash, build_clash_map
 |    |-- detect_lamp.py # detect_lamp_sets
@@ -128,12 +146,18 @@ wildlamp/
 |    |-- table.py   # write_species_lookup
 |
 |-- thermodynamics/
+|    |-- fold_rna.py    # fold_rna
+|    |-- primer_access.py   # binding_accessibility
 |    |-- primer3_eval.py    # evaluate_primer3
 |    |-- scoring.py # thermo_score
+|    |-- simple_thermo.py   # thermo
 |    |-- vienna_eval.py     # vienna_fold_dna, validate_primer_vienna, validate_lamp_set_vienna
 |
 |-- utils/
+|    |-- gc_content.py # gc_content
+|    |-- load_seq.py    # load_primers_csv, load_fasta
 |    |-- seq.py # gc, bad_run, rc
+|    |-- valid_csv_write.py # write_outputs
 |
 |-- __init__.py 
 |-- LICENSE # open access code - must cite

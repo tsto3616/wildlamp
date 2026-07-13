@@ -105,7 +105,7 @@ def thermo(primer):
 # MAIN PER-GENE ANALYSIS
 ############################################################
 
-def analyse_gene(gene_name, cfg):
+def analyse_gene(gene_name, cfg): 
     gene_seq = load_gene(cfg["fasta"])
     rna_structure, mfe = fold_rna(gene_seq)
 
