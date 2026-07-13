@@ -6,7 +6,7 @@ Provides:
 """
 
 import primer3
-from ..utils.seq import gc  
+from utils.seq import gc  
 
 
 def thermo_score(seq):

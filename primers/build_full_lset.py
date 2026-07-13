@@ -7,7 +7,7 @@ Used by final_primers() to assemble:
 - FIP and BIP constructed from optimised primers
 """
 
-from ..utils.seq import rc
+from utils.seq import rc
 
 
 def build_full_lset(primers, optimised, ref):

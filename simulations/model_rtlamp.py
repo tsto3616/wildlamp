@@ -1,7 +1,7 @@
 import numpy as np
 import math
 import primer3.bindings as p3
-from ..utils.seq import rc
+from utils.seq import rc
 
 def best_match_mismatches(primer: str, template: str) -> int:
     Lp = len(primer)

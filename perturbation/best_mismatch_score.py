@@ -2,7 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 from Bio import SeqIO
-from ..primers.primer_from_csv import load_primers_from_csv
+from primers.primer_from_csv import load_primers_from_csv
 
 
 # ---------------------------------------------------------

@@ -3,7 +3,7 @@ This is for the checking of primers from a csv file to the genome specified by t
 ncbi taxid search
 """
 
-from ..pipeline.primer2hits import primers2hits
+from pipeline.primer2hits import primers2hits
 
 def csv2hits(csv_file, taxid, output="crossreactivity_output.csv"):
     """

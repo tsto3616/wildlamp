@@ -194,3 +194,5 @@ __all__ = [
     "estimate_copies", 
     "stand_curves"
 ]
+
+__version__ = "1.0.3"

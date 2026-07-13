@@ -1,14 +1,14 @@
 import csv
 
-from ..alignment.load_seq import load_alignment, clean_alignment
-from ..utils.seq import rc
-from ..primers.optimise_primer import optimise_primer
-from ..thermodynamics.scoring import thermo_score
-from ..primers.build_full_lset import build_full_lset
-from ..thermodynamics.vienna_eval import validate_lamp_set_vienna
-from ..perturbation.analysis import perturbation_analysis
-from ..perturbation.robustness import compute_perturbation_robustness_scores
-from ..primers.primer_from_csv import load_primers_from_csv
+from alignment.load_seq import load_alignment, clean_alignment
+from utils.seq import rc
+from primers.optimise_primer import optimise_primer
+from thermodynamics.scoring import thermo_score
+from primers.build_full_lset import build_full_lset
+from thermodynamics.vienna_eval import validate_lamp_set_vienna
+from perturbation.analysis import perturbation_analysis
+from perturbation.robustness import compute_perturbation_robustness_scores
+from primers.primer_from_csv import load_primers_from_csv
 
 
 def final_primers(alignment_path, primer_csv, output_csv="final_primers_output.csv"):

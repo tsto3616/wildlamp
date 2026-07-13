@@ -2,7 +2,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
-from ..perturbation.best_mismatch_score import find_best_matches
+from perturbation.best_mismatch_score import find_best_matches
 
 
 def final_perturbation(fasta_folder, primer_csv, output="perturbation_output.csv"):

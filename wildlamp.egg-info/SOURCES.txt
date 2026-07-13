@@ -1,0 +1,8 @@
+LICENSE
+README.md
+pyproject.toml
+wildlamp.egg-info/PKG-INFO
+wildlamp.egg-info/SOURCES.txt
+wildlamp.egg-info/dependency_links.txt
+wildlamp.egg-info/requires.txt
+wildlamp.egg-info/top_level.txt

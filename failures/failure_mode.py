@@ -8,8 +8,8 @@ Identifies:
 - suggested degenerate-base corrections
 """
 
-from ..primers.mismatch import mismatch_cost
-from ..failures.suggest import suggest_degenerate
+from primers.mismatch import mismatch_cost
+from failures.suggest import suggest_degenerate
 
 
 def analyze_failure_modes(lset, aln, names, cost_max=4.0):

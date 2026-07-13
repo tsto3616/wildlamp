@@ -2,7 +2,7 @@
 This command generates the primer hits against a genome using the taxid
 """
 
-from ..primer_hits.crossreactive import blast_sequence, biologically_meaningful
+from primer_hits.crossreactive import blast_sequence, biologically_meaningful
 import csv
 
 def primers2hits(panel, taxid, output="crossreactivity_output.csv"):
