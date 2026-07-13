@@ -35,6 +35,9 @@ panel: [
 primers2hits(panel, taxid, output="preferred specified csv output")
 ```
 
+File directory is below:
+
+```
 wildlamp/
 |
 |-- alignment/
@@ -123,3 +126,4 @@ wildlamp/
 |-- __init__.py 
 |-- LICENSE # open access code - must cite
 |-- README.md
+```
