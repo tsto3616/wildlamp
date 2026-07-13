@@ -53,7 +53,7 @@ Final validation check for the primer sets:
 
 ```
 final_valid(primer_csv_path, unaligned_fasta_path, output="output csv file")
-'''
+```
 
 File directory is below:
 
