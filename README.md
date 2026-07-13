@@ -207,6 +207,4 @@ wildlamp/
 |    |-- valid_csv_write.py # write_outputs
 |
 |-- __init__.py 
-|-- LICENSE # open access code - must cite
-|-- README.md
 ```
