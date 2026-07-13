@@ -1,41 +1,69 @@
+#!/usr/bin/env python3
+
+import csv
+
 from alignment.load_seq import load_alignment, clean_alignment
 from alignment.conservation import compute_conservation
+
 from primers.scan import scan_primers
 from primers.species import filter_primers_by_species, primer_species_coverage
 from primers.clash import build_clash_map
 from primers.detect_lamp import detect_lamp_sets
+
 from primers.amplicons import amplicon_heuristic, amplicon_score
 from thermodynamics.primer3_eval import evaluate_primer3
 from thermodynamics.vienna_eval import validate_lamp_set_vienna
+
 from primers.lamp_score import lamp_score, rtlamp_score
+
 from perturbation.analysis import perturbation_analysis
-from perturbation.robustness import build_robustness_matrix, compute_perturbation_robustness_scores
+from perturbation.robustness import (
+    build_robustness_matrix,
+    compute_perturbation_robustness_scores
+)
+
 from failures.debug import debug_no_matches
 from failures.failure_mode import analyze_failure_modes
 
-import csv
 
-def init_primers(alignment_path, output_prefix="wildlamp_output"):
+def init_primers(alignment_path, output):
+    """
+    Standalone pipeline command.
+    Users call:
+        init_primers("alignment.fasta", "output_prefix")
 
+    Produces:
+        <prefix>_validated_top20.csv
+        <prefix>_failure_modes.csv
+        <prefix>_perturbation.csv
+    """
+
+    # ------------------------------------------------------------
+    # LOAD + CLEAN ALIGNMENT
+    # ------------------------------------------------------------
     names, raw = load_alignment(alignment_path)
     aln = clean_alignment(raw)
     ref = aln[0]
 
+    # ------------------------------------------------------------
+    # CONSERVATION + PRIMER SCANNING
+    # ------------------------------------------------------------
     cons_array = compute_conservation(aln)
-    
-    primers = scan_primers(ref)
 
+    primers = scan_primers(ref)
     primers = filter_primers_by_species(primers, aln, names)
 
     clash = build_clash_map(primers)
-    
     lamp_sets = detect_lamp_sets(ref, primers, aln, names, clash)
-    
+
     scored = []
     N_species = len(names)
-    
+
+    # ------------------------------------------------------------
+    # SCORING LOOP
+    # ------------------------------------------------------------
     for s in lamp_sets:
-    
+
         species = primer_species_coverage(s, aln, names)
         s["species_matched"] = len(species)
         s["species_list"] = species
@@ -48,37 +76,42 @@ def init_primers(alignment_path, output_prefix="wildlamp_output"):
         s["amp_gc"]      = amp_info["gc"]
         s["amp_penalty"] = amp_info["penalty"]
         s["amp_score"]   = amplicon_score(amp_info)
-        
+
         s["primer3_eval"] = evaluate_primer3(s)
-        s = validate_lamp_set_vienna(s)  
+        s = validate_lamp_set_vienna(s)
 
         s["final_score"]  = lamp_score(s, cons_array, N_species)
         s["rtlamp_score"] = rtlamp_score(s)
-    
+
         scored.append(s)
 
     print("Primers scanned:", len(primers))
     print("LAMP sets detected:", len(lamp_sets))
     print("Scored sets:", len(scored))
     print("Vienna pass:", sum(1 for s in scored if s["vienna_pass"]))
-    
+
+    # ------------------------------------------------------------
+    # ROBUSTNESS
+    # ------------------------------------------------------------
     mat, labels = build_robustness_matrix(scored, aln, names)
     compute_perturbation_robustness_scores(mat, scored)
-    
+
     for s in scored:
-        s["combined_score"] = (
-            0.7 * s["rtlamp_score"] +
-            0.3 * s["perturb_score"]
-        )
+        s["combined_score"] = 0.7 * s["rtlamp_score"] + 0.3 * s["perturb_score"]
 
     validated = [s for s in scored if s["vienna_pass"]]
-    
+
     if len(validated) == 0:
         debug_no_matches(scored, mat, labels)
-        print("No validated sets found. Exiting.")
+        print("No validated sets found.")
         return
 
     validated.sort(key=lambda x: x["combined_score"], reverse=True)
+
+    # ------------------------------------------------------------
+    # OUTPUT 1: TOP 20 VALIDATED SETS
+    # ------------------------------------------------------------
+    validated_file = f"{output}_validated_top20.csv"
 
     fieldnames = [
         "combined_score","rtlamp_score","perturb_score",
@@ -102,7 +135,7 @@ def init_primers(alignment_path, output_prefix="wildlamp_output"):
         "B1_mfe","B1_struct"
     ]
 
-    with open("HSP70_rtlamp_validated_top20.csv","w",newline="") as f:
+    with open(validated_file, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -161,13 +194,20 @@ def init_primers(alignment_path, output_prefix="wildlamp_output"):
             }
             writer.writerow(row)
 
+    print(f"Validated sets written to {validated_file}")
+
+    # ------------------------------------------------------------
+    # OUTPUT 2: FAILURE MODES
+    # ------------------------------------------------------------
+    failure_file = f"{output}_failure_modes.csv"
+
     fail_fields = [
         "species","role","primer_pos","primer_index",
         "original_primer","ref_base","alt_bases",
         "suggested_primer","mismatch_cost"
     ]
 
-    with open("plas_rtlamp_failure_modes.csv","w",newline="") as f2:
+    with open(failure_file, "w", newline="") as f2:
         writer2 = csv.DictWriter(f2, fieldnames=fail_fields)
         writer2.writeheader()
 
@@ -176,6 +216,13 @@ def init_primers(alignment_path, output_prefix="wildlamp_output"):
             for fail in failures:
                 writer2.writerow(fail)
 
+    print(f"Failure modes written to {failure_file}")
+
+    # ------------------------------------------------------------
+    # OUTPUT 3: PERTURBATION TABLE
+    # ------------------------------------------------------------
+    perturb_file = f"{output}_perturbation.csv"
+
     pert_fields = [
         "set_index","role","original_primer","perturbed_primer",
         "primer_pos","species_matched","species_failed",
@@ -183,7 +230,7 @@ def init_primers(alignment_path, output_prefix="wildlamp_output"):
         "perturb_score","perturb_mean","perturb_min","perturb_frac"
     ]
 
-    with open("plas_rtlamp_perturbation.csv","w",newline="") as f4:
+    with open(perturb_file, "w", newline="") as f4:
         writer4 = csv.DictWriter(f4, fieldnames=pert_fields)
         writer4.writeheader()
 
@@ -197,4 +244,5 @@ def init_primers(alignment_path, output_prefix="wildlamp_output"):
                 row["perturb_frac"]  = s["perturb_frac"]
                 writer4.writerow(row)
 
+    print(f"Perturbation analysis written to {perturb_file}")
     print("Pipeline complete.")

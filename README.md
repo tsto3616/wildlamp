@@ -1,5 +1,40 @@
 # wildlamp: a tool for identification of primer binding sites among conserved gene families of primers. 
 
+This package enables the construction of the LAMP primers, their optimisation and checking for quality/ cross-reactivity. The package can be downloaded as: 
+
+```
+pip install wildlamp
+```
+
+The main command for the construction of LAMP primers is the command:
+
+```
+init_primers(alignment_path, output="fill in for your specified output.csv")
+```
+
+Where the user specifies the file path for the aligned set of sequences and the rest occurs by computer. 
+
+Following on from that the user can retrieve the species from the aligned sequence accessions provided they are from NCBI, using the command: 
+
+```
+species_fetch(csv_file)
+```
+
+The primers can then be checked for hits against the genome of a species of their choice using either the csv2hits or the primer2hits command. 
+
+```
+csv2hits(csv_file, taxid, output="fill in your preferred output prefix.csv")
+
+# or use this command if you want to specify your own primers independent of the csv
+panel: [
+    {"FIP": "ATCG...", "BIP": "GGTA..."},
+    {"FIP": "...", "BIP": "..."},
+    ...
+]
+
+primers2hits(panel, taxid, output="preferred specified csv output")
+```
+
 wildlamp/
 |
 |-- alignment/
@@ -20,7 +55,13 @@ wildlamp/
 |    |-- robustness.py  # built_robustness_matrix, compute_perturbation_robustness_scores
 |
 |-- pipeline/
+|    |-- csv2hits.py    # csv2hits
 |    |-- init_primers.py    # init_primers
+|    |-- primer2hits.py     # primers2hits
+|    |-- species_fetch.py   # species_fetch
+|
+|-- primer_hits/
+|    |-- crossreactive.py   # blast_sequence, biologically_meaningful
 |
 |-- primers/
 |    |-- amplicons.py   # amplicon_heuristic and amplicon_score
@@ -66,6 +107,11 @@ wildlamp/
 |                           # primer_species_coverage, thermo_score, primer_ok, optimise_primer, 
 |                           # vienna_fold_dna, vienna_validate_set, mutate_base, perturb_primer,
 |                           # perturbation_analysis, compute_robustness_score, build_full_lset, main
+|
+|-- species/
+|    |-- accession.py   # extract_accession, extract_accessions_from_csv
+|    |-- ncbi_lookup.py # accession_to_gene_id, get_species_from_accession
+|    |-- table.py   # write_species_lookup
 |
 |-- thermodynamics/
 |    |-- primer3_eval.py    # evaluate_primer3
